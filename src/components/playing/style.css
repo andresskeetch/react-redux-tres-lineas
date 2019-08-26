@@ -1,0 +1,19 @@
+.page-message {
+    text-align: center;
+    color: #1976D2
+}
+.page-message-gamer {
+    text-align: center;
+    color: #757575
+}
+.page {
+    padding: 3rem 1rem;
+}
+
+.items {
+    text-align: center;
+    cursor: pointer;
+    height: 25px;
+    border: 1px solid #757575;
+    border-color: #757575;
+}
