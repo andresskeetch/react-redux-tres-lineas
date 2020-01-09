@@ -2,13 +2,16 @@ import React,  { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import getData from '../../redux/actions/getData';
 import selectOption from '../../redux/actions/selectOption';
 import getWinOptions from '../../redux/actions/getWinOptions';
 import restartGame from '../../redux/actions/restartGame';
 import setGameWon from '../../redux/actions/gameWon';
 import './style.css';
+import xImage from '../../assetts/img/x.png';
+import circleImage from '../../assetts/img/circle.png';
+
 
 class Playing extends Component {
     componentDidMount() {
@@ -71,47 +74,46 @@ class Playing extends Component {
         const { data, playerActive, newGame, gameWon } = this.props;
         return (
             <div className="page">
-                <Typography className="page-message" variant="h5" component="h1" >
-                    Tres en Linea
-                </Typography>
-
-                <Typography className="page-message-gamer" component="h3" >
-                    {newGame && <span>Seleccionar para empezar..</span>} Jugador ({playerActive})
-                </Typography>
-                <Grid container spacing={1}>
-                    <Grid item xs={12} md={12}>
-                        <Grid container direction="row">
-                            <Grid item xs={4} md={4} >
-                            </Grid>
-                            <Grid item  md={4} xs={4}>
-                            {data && data.map((row, indexRow) => 
-                                <Grid container direction="row" key={indexRow}>
-                                    {row.columns.map((column, indexColumn) => 
-                                        <Grid key={indexColumn} padding={1} item md={4} xs={4} >
-                                            <Paper 
-                                                className="items" 
-                                                onClick={(event) => this.itemSelected(indexRow, indexColumn, column, playerActive)}>
-                                                <Typography component="label" >
-                                                    {column.value}
-                                                </Typography>
-                                                
-                                            </Paper>
-                                        </Grid>
-                                    )} 
+                <div className="page__header">
+                    <Typography className="page-message" variant="h1" component="h1" >
+                            Tres en Linea
+                    </Typography>
+                </div>
+                <div className="page__container">
+                    <Typography className="page-message-gamer" component="h3" >
+                        {newGame && <span>Seleccionar para empezar..</span>} Jugador ({playerActive})
+                    </Typography>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} md={12}>
+                            <Grid container direction="row" justify="center">
+                                <Grid item  md={4} xs={4}>
+                                {data && data.map((row, indexRow) => 
+                                    <Grid container direction="row" key={indexRow}>
+                                        {row.columns.map((column, indexColumn) => 
+                                            <Grid key={indexColumn} padding={1} item md={4} xs={4} >
+                                                <Paper 
+                                                    className="items" 
+                                                    onClick={() => this.itemSelected(indexRow, indexColumn, column, playerActive)}>
+                                                    {column.value ? (column.value === 'X' ? <img src={xImage} alt="X" /> : <img src={circleImage} alt="O" />) : null}
+                                                </Paper>
+                                            </Grid>
+                                        )} 
+                                    </Grid>
+                                )}
                                 </Grid>
-                            )}
-                            </Grid>
-                            <Grid item xs={4} md={4}>
                             </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-                { gameWon &&
-                    <Typography className="page-message-gamer" component="h3" 
-                        onClick={(event) => this.restartGame()}>
-                        Reniciar Juego
-                    </Typography>
-                }
+                </div>
+                <div className="page__footer">
+                    { !gameWon &&
+                        <div className="restart">
+                            <Button variant="contained" color="primary" onClick={() => this.restartGame()}>
+                                Reniciar Juego
+                            </Button>
+                        </div>
+                    }
+                </div>
             </div>
         );
     }

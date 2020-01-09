@@ -6,14 +6,44 @@
     text-align: center;
     color: #757575
 }
-.page {
-    padding: 3rem 1rem;
+body {
+    margin: 0px;
 }
-
+.page {
+    overflow: hidden;
+}
+.page__header {
+    height: 20vh;
+}
+.page__container {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.page__footer {
+    height: 20vh;
+}
 .items {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    height: 25px;
+    height: 50px;
     border: 1px solid #757575;
     border-color: #757575;
+}
+.items button{
+    height: 100%;
+    width: 100%;
+}
+.items img{
+    height: 30px;
+    width: 30px;
+}
+
+.restart {
+    text-align: center;
+    padding: 5px;
 }
